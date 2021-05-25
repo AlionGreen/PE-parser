@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 	printf("\t0x%x\t\tFile address of new exe header\n", dos_header->e_lfanew);
 	
 	typedef unsigned long long QWORD;
-	typedef unsigned long long *PQWORD;
+
 	PIMAGE_NT_HEADERS64 nt_headers = (PIMAGE_NT_HEADERS64)((QWORD)fileData + dos_header->e_lfanew); 
 
 	printf("\nNT HEADERS\n");
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 	
 	QWORD section_header_address = (QWORD)nt_headers + (QWORD)24 + (QWORD)nt_headers->FileHeader.SizeOfOptionalHeader;
 	PIMAGE_SECTION_HEADER section_header = (PIMAGE_SECTION_HEADER)section_header_address;
-	QWORD rawOffset = NULL;
+
 	for (int i = 1; i <= nt_headers->FileHeader.NumberOfSections; i++) {
 		printf("\t\t%s\t\tVirtual Address:%x", section_header->Name,section_header->VirtualAddress);
 		printf("\t\tRaw Address: 0x%x",section_header->PointerToRawData);
